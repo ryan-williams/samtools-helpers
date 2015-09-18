@@ -24,7 +24,7 @@ Each of them takes a `.sam` runs `samtools view`, and then makes the following i
 
 ## Examples
 
-First 5 non-header lines, using `samtools-view`:
+#### First 5 non-header lines, using `samtools-view`:
 ```sh
 sv 5 NA12878.sam
 20FUKAAXX100202:3:6:15018:84106    000010100011  20  224759  60  101M         =  225025  366   ACCCAAATCTAATCAAGGCTCCCACTCTAACTCCCAAGCTCTAGGATATACCAAGGACAAAGGAAGATCATGAAATACCACCATGGGGATTCAATCAGCAA  ?@BBBCEEDFEFEEEFDEEFEEEEBFEDEFCFDDEEFEDFDFEEEFEEEECEEFEEFCEFDEEFFEFEDEEEFFFDECEDCEFEEDDFFBFEFGEAEDCCC  MD:Z:101                     PG:Z:BWA  RG:Z:20FUK.3  AM:i:37  NM:i:0  SM:i:37  MQ:i:60                                                                                                     OQ:Z:HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHGHHHHHHHHHHHHHHFHHHGHHHHHIIHHDHHHHHEHHHHH  UQ:i:0
@@ -33,8 +33,9 @@ sv 5 NA12878.sam
 20GAVAAXX100126:7:47:4730:37293    000010100011  20  224761  60  101M         =  225073  412   CCAAATCTAATCAAGGCTCCCACTCTAACTCCCAAGCTCTAGGATATACCAAGGACAAAGGAAGATCATGAAATACCACCATGGGGATTCAATCAGCAAAT  ?BB@BCBFDDECC=E@@DB;BDCFDE<<AEB@B>BADD>?C?EDEB>@AC=<?=DAE?E=CAC?;<C=@ADD?ACACCAC>:>4=B676<17@@<:AA<;6  MD:Z:101                     PG:Z:BWA  RG:Z:20GAV.7  AM:i:37  NM:i:0  SM:i:37  MQ:i:60                                                                                                     OQ:Z:BBA>AB@BB@BA?>B==??7>@BBA@:6@@@@@@A@BAA>A?B@BA?=?>9=????@?@>>>@?67@<;??@>?@????@9:96=>2236-39=73@:652  UQ:i:0
 20GAVAAXX100126:5:46:21151:39489   000001010011  20  224761  60  101M         =  224465  -396  CCAAATCTAATCAAGGCTCCCACTCTAACTCCCAAGCTCTAGGATATACCAAGGACAAAGGAAGATCATGAAATACCACCATGGGGATTCAATCAGCAAAT  >9<=BBB>BB>EFFEEEFEEECEFEEFDEFEEEFFEEFEEFDDEEEEDEEFFDDDDFFFDDFFDEFDEEDFFEEEEEEEEEFEEEEEFFEFEFEF=DED=A  MD:Z:101                     PG:Z:BWA  RG:Z:20GAV.5  AM:i:37  NM:i:0  SM:i:37  MQ:i:60                                                                                                     OQ:Z:DBGGFDFCFFBHHHHHHHHHHGHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHEHHHGH  UQ:i:0
 ```
+It's still on you to know [which of the 12 bits mean what](https://samtools.github.io/hts-specs/SAMv1.pdf), but it's a lot better than doing the binary conversion in your head!
 
-First 5 non-header lines, using regular `samtools view`:
+#### First 5 non-header lines, using regular `samtools view`:
 ```sh
 $ samtools view NA12878.sam | head -n 5
 20FUKAAXX100202:3:6:15018:84106	163	20	224759	60	101M	=	225025	366	ACCCAAATCTAATCAAGGCTCCCACTCTAACTCCCAAGCTCTAGGATATACCAAGGACAAAGGAAGATCATGAAATACCACCATGGGGATTCAATCAGCAA	?@BBBCEEDFEFEEEFDEEFEEEEBFEDEFCFDDEEFEDFDFEEEFEEEECEEFEEFCEFDEEFFEFEDEEEFFFDECEDCEFEEDDFFBFEFGEAEDCCC	MD:Z:101	PG:Z:BWA	RG:Z:20FUK.3	AM:i:37	NM:i:0	SM:i:37	MQ:i:60	OQ:Z:HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHGHHHHHHHHHHHHHHFHHHGHHHHHIIHHDHHHHHEHHHHH	UQ:i:0
@@ -46,14 +47,14 @@ $ samtools view NA12878.sam | head -n 5
 
 Note the opaque binary-flag integers in the second field, and the misalignments of some columns.
 
-Entire `.sam` file without header:
+#### Entire `.sam` file without header:
 ```sh
 sv NA12878.sam
 # or:
 samtools-view NA12878.sam
 ```
 
-Entire `.sam` file with header:
+#### Entire `.sam` file with header:
 ```sh
 svh NA12878.sam
 samtools-view-with-header NA12878.sam
