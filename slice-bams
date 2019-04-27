@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+set -e
+
+range="$1"
+shift
+
+out="$1"
+shift
+
+echo "args: $@"
+echo "$@" | tr ' ' '\n' | parallel -k -j+0 --env PATH "samtools view -hb {} -o $out/{/} $range && echo -n $out/{/}': ' && samtools view -c $out/{/}"
+#echo "$@" | tr ' ' '\n' | parallel -k -j+0 --env PATH "echo {} $out/{/}"
+#for bam in "$@"; do
+#  outbam="$out/$(basename "$bam")"
+#  samtools view -hb "$bam" -o "$outbam" "$range"
+#  echo -n "$outbam: "
+#  samtools view -c "$outbam"
+#done
